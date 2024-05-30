@@ -35,8 +35,8 @@ int main(){
 	int64_t r;
 	int64_t D = 0;
 	int64_t I = 0;
-	clock_t s, e;
-	s = clock();
+	clock_t si, ei, sf, ef;
+	si = clock();
 	for(int64_t i = 0; i<n;i++){ //do some random insertions and deletions
 		r = rand()%n;
 		if(rand()%3){ //P(delete) = 1/3, P(insert) = 2/3
@@ -49,6 +49,8 @@ int main(){
 			insert_key(r, T1);
 		}
 	}
+	ei = clock();
+	sf = clock();
 	int64_t K = 0;
 	for(int64_t i = 0; i<n;i++){ //find if trees agree
 		if(find_key(i,T0) != find_key(i, T1)){
@@ -59,9 +61,9 @@ int main(){
 			}
 		}
 	}
-	e = clock();
+	ef = clock();
 	delete_turbotreap(T0);
 	delete_turbotreap(T1);
-	printf("Completed: test_1 (if no Warnings were printed, test_1 was successful)\nStats: %ld insertions and %ld deletions were made, %ld nodes were in the trees, Completed in %f seconds \n", I, D, K, ((double)(e - s))/CLOCKS_PER_SEC);
+	printf("Completed: test_1 (if no Warnings were printed, test_1 was successful)\nStats: %ld insertions and %ld deletions were made, %ld nodes were in the trees, Insert/Delete completed in %f seconds, Query completed in %f seconds. \n", I, D, K, ((double)(ei - si))/CLOCKS_PER_SEC, ((double)(ef - sf))/CLOCKS_PER_SEC);
 	return 0;
 }
